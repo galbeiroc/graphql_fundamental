@@ -1,4 +1,5 @@
 import { gql, ApolloServer } from 'apollo-server';
+import { v1 as uuid } from 'uuid';
 
 const persons = [
   {
@@ -42,6 +43,19 @@ const typeDefs = gql`
     allPersons: [Person]!
     findPerson(name: String!): Person
   }
+
+  type Mutation {
+    addPerson(
+      name: String!
+      phone: String
+      street: String!
+      city: String!
+    ): Person
+    editNumber(
+      name: String!
+      phone: String!
+    ): Person
+  }
 `
 
 // Resolvers
@@ -52,6 +66,23 @@ const resolvers = {
     findPerson: (root, args) => {
       const { name } = args;
       return persons.find((person) => person.name === name);
+    }
+  },
+  Mutation: {
+    addPerson: (root, args) => {
+      const person = { ...args, id: uuid() };
+      persons.push(person);
+      return person;
+    },
+    editNumber: (root, args) => {
+      const personIndex = persons.findIndex(p => p.name === args.name);
+      if (personIndex === -1) return null;
+
+      const person = persons[personIndex];
+      const updatedPerson = { ...person, phone: args.phone };
+      persons[personIndex] = updatedPerson;
+
+      return updatedPerson;
     }
   },
   Person: {
