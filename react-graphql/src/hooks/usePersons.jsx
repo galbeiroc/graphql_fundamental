@@ -1,6 +1,6 @@
 import { useQuery, useLazyQuery, useMutation } from '@apollo/client'
 import { useEffect, useState } from 'react'
-import { CREATE_PERSON } from '../graphql/mutations'
+import { CREATE_PERSON, EDIT_NUMBER } from '../graphql/mutations'
 import { ALL_PERSONS, FIND_PERSON } from '../graphql/queries'
 
 export const usePersons = () => {
@@ -27,8 +27,6 @@ export const useFindPerson = () => {
 }
 
 export const useCreatePerson = (notifyError) => {
-  const [newPerson, setNewPerson] = useState({ name: '', phone: '', street: '', city: '' })
-  
   const [createPerson] = useMutation(CREATE_PERSON, {
     refetchQueries: [{ query: ALL_PERSONS }],
     onError: (error) => {
@@ -36,5 +34,11 @@ export const useCreatePerson = (notifyError) => {
     }
   })
 
-  return { newPerson, createPerson, setNewPerson }
+  return createPerson
+}
+
+export const useEditPhone = () => {  
+  const [editNumber] = useMutation(EDIT_NUMBER)
+
+  return editNumber
 }

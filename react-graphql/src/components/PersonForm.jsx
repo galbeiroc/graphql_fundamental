@@ -1,12 +1,13 @@
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import { useCreatePerson } from '../hooks/usePersons'
 
 export const PersonForm = ({ notifyError }) => {
-  const { newPerson, createPerson, setNewPerson } = useCreatePerson(notifyError)
+  const [newPerson, setNewPerson] = useState({ name: '', phone: '', street: '', city: '' })
+  const createPerson = useCreatePerson(notifyError)
 
-  const handleChange = useCallback(({ target: { name, value }}) => {
-    setNewPerson({...newPerson, [name]: value})
-  }, [])
+  const handleChange = ({ target: { name, value }}) => {
+    setNewPerson({ ...newPerson, [name]: value })
+  }
 
   const handleSubmit = useCallback((e) => {
     e.preventDefault()

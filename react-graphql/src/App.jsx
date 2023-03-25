@@ -5,6 +5,7 @@ import { Persons } from './components/Persons'
 import { PersonForm } from './components/PersonForm'
 import { usePersons } from './hooks/usePersons'
 import { Notify } from './components/Notify'
+import { PhoneForm } from './components/PhoneForm'
 
 function App() {
   const { data, error, loading } = usePersons()
@@ -25,6 +26,7 @@ function App() {
         ? <p>Loading...</p>
         : <Persons persons={data.allPersons} />
       }
+      <PhoneForm />
       <PersonForm notifyError={notifyError} />
     </div>
   )
