@@ -1,22 +1,9 @@
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import { Persons } from './components/Persons'
 import { PersonForm } from './components/PersonForm'
-
-export const ALL_PERSONS = gql`
-  query {
-    allPersons {
-      id
-      name
-      phone
-      address {
-        street
-        city
-      }
-    }
-  }
-`
+import { ALL_PERSONS } from './graphql/queries'
 
 function App() {
   const { data, error, loading } = useQuery(ALL_PERSONS, { pollInterval: 2000 })

@@ -1,6 +1,6 @@
 import { gql, useMutation } from '@apollo/client'
 import { useState } from 'react'
-import { ALL_PERSONS } from '../App'
+import { ALL_PERSONS } from '../graphql/queries'
 
 const CREATE_PERSON = gql`
   mutation createPerson($name: String!, $phone: String, $street: String!, $city: String!) {
