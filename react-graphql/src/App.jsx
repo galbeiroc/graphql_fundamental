@@ -2,6 +2,7 @@ import { gql, useQuery } from '@apollo/client'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import { Persons } from './components/Persons'
+import { PersonForm } from './components/PersonForm'
 
 const ALL_PERSONS = gql`
   query {
@@ -29,6 +30,7 @@ function App() {
         ? <p>Loading...</p>
         : <Persons persons={data.allPersons} />
       }
+      <PersonForm />
     </div>
   )
 }
