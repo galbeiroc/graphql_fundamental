@@ -1,12 +1,11 @@
-import { useQuery } from '@apollo/client'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import { Persons } from './components/Persons'
 import { PersonForm } from './components/PersonForm'
-import { ALL_PERSONS } from './graphql/queries'
+import { usePersons } from './hooks/usePersons'
 
 function App() {
-  const { data, error, loading } = useQuery(ALL_PERSONS, { pollInterval: 2000 })
+  const { data, error, loading } = usePersons()
 
   if (error) return <span style='color: red'>{error}</span>
 

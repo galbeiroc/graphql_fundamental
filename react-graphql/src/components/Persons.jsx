@@ -1,23 +1,7 @@
-import { useLazyQuery } from '@apollo/client'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import { FIND_PERSON } from '../graphql/queries'
-
-
+import { useFindPerson } from "../hooks/usePersons"
 
 export const Persons = ({ persons }) => {
-  const [getPerson, result] = useLazyQuery(FIND_PERSON)
-  const [person, setPerson] = useState(null)
-
-  const showPerson = name => {
-    getPerson({ variables: { nameToSearch: name }})
-  }
-
-  useEffect(() => {
-    if (result.data) {
-      setPerson(result.data.findPerson)
-    }
-  }, [result])
+  const { person, showPerson, setPerson } = useFindPerson()
 
   if (person) {
     return (
