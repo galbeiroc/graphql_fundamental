@@ -1,8 +1,8 @@
 import { useCallback } from 'react'
 import { useCreatePerson } from '../hooks/usePersons'
 
-export const PersonForm = () => {
-  const { newPerson, createPerson, setNewPerson } = useCreatePerson()
+export const PersonForm = ({ notifyError }) => {
+  const { newPerson, createPerson, setNewPerson } = useCreatePerson(notifyError)
 
   const handleChange = useCallback(({ target: { name, value }}) => {
     setNewPerson({...newPerson, [name]: value})

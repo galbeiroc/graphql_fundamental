@@ -26,11 +26,14 @@ export const useFindPerson = () => {
   return { person, showPerson, setPerson }
 }
 
-export const useCreatePerson = () => {
+export const useCreatePerson = (notifyError) => {
   const [newPerson, setNewPerson] = useState({ name: '', phone: '', street: '', city: '' })
   
   const [createPerson] = useMutation(CREATE_PERSON, {
-    refetchQueries: [{ query: ALL_PERSONS }]
+    refetchQueries: [{ query: ALL_PERSONS }],
+    onError: (error) => {
+      notifyError(error.graphQLErrors[0].message)
+    }
   })
 
   return { newPerson, createPerson, setNewPerson }
