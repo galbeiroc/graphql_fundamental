@@ -19,7 +19,7 @@ const ALL_PERSONS = gql`
 `
 
 function App() {
-  const { data, error, loading } = useQuery(ALL_PERSONS)
+  const { data, error, loading } = useQuery(ALL_PERSONS, { pollInterval: 2000 })
 
   if (error) return <span style='color: red'>{error}</span>
 
