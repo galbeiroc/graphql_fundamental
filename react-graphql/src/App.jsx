@@ -4,7 +4,7 @@ import './App.css'
 import { Persons } from './components/Persons'
 import { PersonForm } from './components/PersonForm'
 
-const ALL_PERSONS = gql`
+export const ALL_PERSONS = gql`
   query {
     allPersons {
       id
