@@ -1,43 +1,20 @@
-import { gql, useMutation } from '@apollo/client'
-import { useState } from 'react'
-import { ALL_PERSONS } from '../graphql/queries'
+import { useCallback } from 'react'
+import { useCreatePerson } from '../hooks/usePersons'
 
-const CREATE_PERSON = gql`
-  mutation createPerson($name: String!, $phone: String, $street: String!, $city: String!) {
-    addPerson(
-      name: $name
-      phone: $phone
-      street: $street
-      city: $city
-    ) {
-      name
-      phone
-      address {
-        city
-        street
-      }
-      id
-    }
-  }
-`
 export const PersonForm = () => {
-  const [newPerson, setNewPerson] = useState({ name: '', phone: '', street: '', city: '' })
-  
-  const [createPerson] = useMutation(CREATE_PERSON, {
-    refetchQueries: [{ query: ALL_PERSONS }]
-  })
+  const { newPerson, createPerson, setNewPerson } = useCreatePerson()
 
-  const handleChange = ({ target: { name, value }}) => {
+  const handleChange = useCallback(({ target: { name, value }}) => {
     setNewPerson({...newPerson, [name]: value})
-  }
+  }, [])
 
-  const handleSubmit = e => {
+  const handleSubmit = useCallback((e) => {
     e.preventDefault()
 
     createPerson({ variables: { ...newPerson }})
 
     setNewPerson({ name: '', phone: '', street: '', city: '' })
-  }
+  }, [])
 
   return (
     <div>

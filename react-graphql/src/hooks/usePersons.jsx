@@ -1,5 +1,6 @@
-import { useQuery, useLazyQuery } from '@apollo/client'
+import { useQuery, useLazyQuery, useMutation } from '@apollo/client'
 import { useEffect, useState } from 'react'
+import { CREATE_PERSON } from '../graphql/mutations'
 import { ALL_PERSONS, FIND_PERSON } from '../graphql/queries'
 
 export const usePersons = () => {
@@ -23,4 +24,14 @@ export const useFindPerson = () => {
   }, [result])
 
   return { person, showPerson, setPerson }
+}
+
+export const useCreatePerson = () => {
+  const [newPerson, setNewPerson] = useState({ name: '', phone: '', street: '', city: '' })
+  
+  const [createPerson] = useMutation(CREATE_PERSON, {
+    refetchQueries: [{ query: ALL_PERSONS }]
+  })
+
+  return { newPerson, createPerson, setNewPerson }
 }

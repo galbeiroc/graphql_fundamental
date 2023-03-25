@@ -17,7 +17,7 @@ export const Persons = ({ persons }) => {
 
   return (
     <div>
-      <h3>Persons</h3>
+      <h2>Persons</h2>
       {persons.map((person) => (
         <div key={person.id} onClick={() => showPerson(person.name)}>
           {person.name} {person.phone}
