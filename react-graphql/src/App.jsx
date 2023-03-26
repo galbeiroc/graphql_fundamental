@@ -26,7 +26,7 @@ function App() {
         ? <p>Loading...</p>
         : <Persons persons={data.allPersons} />
       }
-      <PhoneForm />
+      <PhoneForm notifyError={notifyError} />
       <PersonForm notifyError={notifyError} />
     </div>
   )

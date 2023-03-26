@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useEditPhone } from '../hooks/usePersons'
 
-export const PhoneForm = () => {
+export const PhoneForm = ({ notifyError }) => {
   const [editPhone, setEditPhone] = useState({ name: '', phone: '' })
-  const editNumber = useEditPhone()
+  const editNumber = useEditPhone(notifyError)
 
   const handleChange = ({ target: { name, value }}) => {
     setEditPhone({ ...editPhone, [name]: value })
@@ -16,7 +16,6 @@ export const PhoneForm = () => {
 
     setEditPhone({ name: '', phone: '' })
   }
-  console.log(editPhone)
 
   return (
     <div>

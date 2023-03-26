@@ -37,8 +37,13 @@ export const useCreatePerson = (notifyError) => {
   return createPerson
 }
 
-export const useEditPhone = () => {  
-  const [editNumber] = useMutation(EDIT_NUMBER)
+export const useEditPhone = (notifyError) => {  
+  const [editNumber, result] = useMutation(EDIT_NUMBER)
+  useEffect(() => {
+    if (result.data && !result.data.editNumber) {
+      notifyError('Person not found')
+    }
+  }, [result.data])
 
   return editNumber
 }
